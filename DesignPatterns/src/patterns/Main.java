@@ -1,10 +1,23 @@
 package patterns;
 
+import patterns.creational.factory.Animal;
+import patterns.creational.factory.AnimalFactory;
 import patterns.creational.singleton.Singleton;
 
 public class Main {
 	public static void main(String[] args) {		
 		singletonDesignPattern();
+		factoryDesignPattern();
+	}
+
+	private static void factoryDesignPattern() {
+		Animal animal=AnimalFactory.getAnimal("dog");
+		animal.move();
+		animal.speak();
+		
+		animal=AnimalFactory.getAnimal("cat");
+		animal.move();
+		animal.speak();
 	}
 
 	private static void singletonDesignPattern() {
