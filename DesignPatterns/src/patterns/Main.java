@@ -5,13 +5,68 @@ import patterns.creational.builder.Vehicle;
 import patterns.creational.builder.VehicleBuilder;
 import patterns.creational.factory.Animal;
 import patterns.creational.factory.AnimalFactory;
+import patterns.creational.prototype.MarklistWithDeepCloning;
+import patterns.creational.prototype.MarklistWithShallowCloning;
 import patterns.creational.singleton.Singleton;
 
 public class Main {
-	public static void main(String[] args) {		
+	public static void main(String[] args) throws CloneNotSupportedException {		
 		singletonDesignPattern();
 		factoryDesignPattern();
 		builderPattern();
+		prototypePattern();
+	}
+
+	private static void prototypePattern() throws CloneNotSupportedException {
+
+		
+		System.out.println("-----------Deep Cloning Start------------------");
+		/**In Deep Cloning - Original Obj and Cloned Obj will have different References*/
+		MarklistWithDeepCloning marklistOriginal=new MarklistWithDeepCloning("Deep Clone");
+		System.out.println("Original Marklist: "+marklistOriginal);
+		
+		MarklistWithDeepCloning markListCopy=marklistOriginal.clone();
+		System.out.println("Cloning Completed");
+
+		marklistOriginal.subjects.remove(1);
+		System.out.println("Removed Subject 1 from Original");
+		System.out.println("Original marklist after removal of a Subject: "+marklistOriginal);
+		System.out.println("Copy of Original MarkLst: "+markListCopy);
+		System.out.println("-----------Deep Cloning End------------------");
+		
+		
+		System.out.println("-----------Shallow Cloning Start------------------");
+		/** Shallow Cloning using Cloneable - In Shallow Cloning, Original and Cloned Obj References will be same **/
+		MarklistWithShallowCloning shallowMarkListOriginal=new MarklistWithShallowCloning("Shallow Clone");
+		System.out.println("Shallow-Original Marklist: "+shallowMarkListOriginal);
+		MarklistWithShallowCloning shallowMarkListCopy=(MarklistWithShallowCloning) shallowMarkListOriginal.clone();
+		System.out.println("Cloning Completed");
+
+		shallowMarkListOriginal.subjects.remove(1);
+		System.out.println("Removed Subject 1 from Original");
+		System.out.println("Original marklist after removal of a Subject: "+shallowMarkListOriginal);
+		System.out.println("Copy of Original MarkLst: "+shallowMarkListCopy);
+		System.out.println("-----------Shallow Cloning End------------------");
+
+		/***
+		 * 
+		 * Results
+		 * -----------Deep Cloning Start------------------
+Original Marklist: Student Name: Deep Clone [Subjects: [{ Subject0:100}, { Subject1:99}, { Subject2:98}] ]
+Cloning Completed
+Removed Subject 1 from Original
+Original marklist after removal of a Subject: Student Name: Deep Clone [Subjects: [{ Subject0:100}, { Subject2:98}] ]
+Copy of Original MarkLst: Student Name: Deep Clone [Subjects: [{ Subject0:100}, { Subject1:99}, { Subject2:98}] ]
+-----------Deep Cloning End------------------
+-----------Shallow Cloning Start------------------
+Shallow-Original Marklist: Student Name: Shallow Clone [Subjects: [{ Subject0:100}, { Subject1:99}, { Subject2:98}] ]
+Cloning Completed
+Removed Subject 1 from Original
+Original marklist after removal of a Subject: Student Name: Shallow Clone [Subjects: [{ Subject0:100}, { Subject2:98}] ]
+Copy of Original MarkLst: Student Name: Shallow Clone [Subjects: [{ Subject0:100}, { Subject2:98}] ]
+-----------Shallow Cloning End------------------
+
+		 */
 	}
 
 	private static void builderPattern() {
