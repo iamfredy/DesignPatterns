@@ -1,5 +1,13 @@
 package patterns;
 
+import patterns.Utils.CarCompany;
+import patterns.Utils.CarModel;
+import patterns.creational.abstractFactory.GUI;
+import patterns.creational.abstractFactory.IButton;
+import patterns.creational.abstractFactory.IGUIFactory;
+import patterns.creational.abstractFactory2.Car;
+import patterns.creational.abstractFactory2.CarFactory;
+import patterns.creational.abstractFactory2.CarFactoryProducer;
 import patterns.creational.builder.User;
 import patterns.creational.builder.Vehicle;
 import patterns.creational.builder.VehicleBuilder;
@@ -11,10 +19,46 @@ import patterns.creational.singleton.Singleton;
 
 public class Main {
 	public static void main(String[] args) throws CloneNotSupportedException {		
-		singletonDesignPattern();
-		factoryDesignPattern();
-		builderPattern();
-		prototypePattern();
+//		singletonDesignPattern();
+//		factoryDesignPattern();
+		abstractFactoryPattern();
+//		builderPattern();
+//		prototypePattern();
+		
+	}
+
+	private static void abstractFactoryPattern() {
+
+		IGUIFactory guiFactory=GUI.getGUIFactory("macos");
+		IButton button=guiFactory.getButton();
+		button.displayButtonInUI();
+		guiFactory.getCheckBox().renderCheckBoxinUI();
+		guiFactory=GUI.getGUIFactory("windows");
+		guiFactory.getButton().displayButtonInUI();
+		guiFactory.getCheckBox().renderCheckBoxinUI();
+		
+		//Abstract Factory 
+		CarFactory tataCarFactory=CarFactoryProducer.getCarFactory(CarCompany.TATA);
+		Car harrier=tataCarFactory.getCar(CarModel.HARRIER);
+		harrier.drive();
+		Car altroz=tataCarFactory.getCar(CarModel.ALTROZ);
+		altroz.drive();
+		
+		CarFactory hondaCarFactory=CarFactoryProducer.getCarFactory(CarCompany.HONDA);
+		Car brio=hondaCarFactory.getCar(CarModel.BRIO);
+		brio.drive();
+		Car city=hondaCarFactory.getCar(CarModel.CITY);
+		city.drive();
+		
+/**Displaying MacOS Button in the UI
+Displaying MacOS CheckBox in the UI
+Displaying Windows Button in the UI
+Displaying Windows Button in the UI
+Driving in Tata Harrier
+Driving in Tata Altroz
+Driving in Honda Brio
+Driving in Honda City
+*/		
 	}
 
 	private static void prototypePattern() throws CloneNotSupportedException {
