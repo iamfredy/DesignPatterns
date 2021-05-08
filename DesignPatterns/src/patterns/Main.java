@@ -16,14 +16,34 @@ import patterns.creational.factory.AnimalFactory;
 import patterns.creational.prototype.MarklistWithDeepCloning;
 import patterns.creational.prototype.MarklistWithShallowCloning;
 import patterns.creational.singleton.Singleton;
+import patterns.structural.adapter.CovidAPIAdapter;
+import patterns.structural.adapter.CovidAPINewImpl;
+import patterns.structural.adapter.CovidAPIOldImpl;
+import patterns.structural.adapter.CovidOldAPI;
 
 public class Main {
-	public static void main(String[] args) throws CloneNotSupportedException {		
-//		singletonDesignPattern();
-//		factoryDesignPattern();
+	public static void main(String[] args) throws CloneNotSupportedException {	
+		/**Creational Design Pattern Start**/
+		singletonDesignPattern();
+		factoryDesignPattern();
 		abstractFactoryPattern();
-//		builderPattern();
-//		prototypePattern();
+		builderPattern();
+		prototypePattern();
+		
+		/**Structural Design Pattern Start**/
+		adapterPatternAKAWrapper();
+		
+	}
+
+	private static void adapterPatternAKAWrapper() {
+		CovidOldAPI oldAPI=new CovidAPIOldImpl();
+		String response=oldAPI.data();
+		System.out.println("OLD API Response: "+response);
+		
+		oldAPI=new CovidAPIAdapter(new CovidAPINewImpl());
+		response=oldAPI.data();
+		System.out.println("New API Response in Expected format of Old API via Wrapper: "+response);
+		
 		
 	}
 
