@@ -8,4 +8,8 @@ public class Utils {
 	public enum CarModel{
 		HARRIER,BRIO,CITY,ALTROZ;
 	}
+	
+	public enum PaymentMode{
+		CARD,UPI,NETBANKING;
+	}
 }

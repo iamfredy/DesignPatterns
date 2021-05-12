@@ -20,19 +20,89 @@ import patterns.structural.adapter.CovidAPIAdapter;
 import patterns.structural.adapter.CovidAPINewImpl;
 import patterns.structural.adapter.CovidAPIOldImpl;
 import patterns.structural.adapter.CovidOldAPI;
+import patterns.structural.bridge.viewableentities.ViewableAgent;
+import patterns.structural.bridge.viewableentities.ViewableEntity;
+import patterns.structural.bridge.viewableentities.ViewableTeam;
+import patterns.structural.bridge.views.DetailView;
+import patterns.structural.bridge.views.ListView;
+import patterns.structural.bridge.views.View;
+import patterns.structural.bridge2.CardPayment;
+import patterns.structural.bridge2.CitiBankPaymentGateway;
+import patterns.structural.bridge2.HDFCPaymentGateWay;
+import patterns.structural.bridge2.Payment;
+import patterns.structural.bridge2.UPIPayment;
 
 public class Main {
 	public static void main(String[] args) throws CloneNotSupportedException {	
 		/**Creational Design Pattern Start**/
-		singletonDesignPattern();
-		factoryDesignPattern();
-		abstractFactoryPattern();
-		builderPattern();
-		prototypePattern();
+//		singletonDesignPattern();
+//		factoryDesignPattern();
+//		abstractFactoryPattern();
+//		builderPattern();
+//		prototypePattern();
+//		
+//		/**Structural Design Pattern Start**/
+//		adapterPatternAKAWrapper();
+		bridgePattern();
 		
-		/**Structural Design Pattern Start**/
-		adapterPatternAKAWrapper();
+	}
+
+	private static void bridgePattern() {
 		
+		Payment payment=new CardPayment();
+		payment.paymentGateway=new CitiBankPaymentGateway();
+		payment.makepayment();
+		
+		payment=new UPIPayment();
+		payment.paymentGateway=new HDFCPaymentGateWay();
+		payment.makepayment();
+		
+		
+		//Agent List View
+		ViewableEntity entity=new ViewableAgent("Fredric", "Member Techical Staff-Zoho Desk", "zohodesk/automtionteam/fred.jpg");
+		View view=new ListView(entity);
+		view.display();
+		//Agent Detail View
+		view=new DetailView(entity);
+		view.display();
+		
+		
+		//Team ListView
+		entity=new ViewableTeam("Automation Team", "zohodesk/atomationteam/teamlogo.jpg");
+		view=new ListView(entity);
+		view.display();
+		//Team Detail View
+		view=new DetailView(entity);
+		view.display();
+/**
+ * 
+ * *****List View For Agent***************************
+*****Name            :Fredric
+*****Logo            :zohodesk/automtionteam/fred.jpg
+*****Last Modified On:2021-05-12T19:31:29.799Z
+**************************************************
+****Detail View For Agent***************************
+*****Name             :Fredric
+*****Description      :Member Techical Staff-Zoho Desk
+*****Logo             :zohodesk/automtionteam/fred.jpg
+*****Last Modified On :2021-05-12T19:31:29.799Z
+*****Created On       :2021-05-12T19:25:29.799Z
+**************************************************
+*****List View For Team***************************
+*****Name            :Automation Team
+*****Logo            :zohodesk/atomationteam/teamlogo.jpg
+*****Last Modified On:2021-05-12T19:28:39.039Z
+**************************************************
+****Detail View For Team***************************
+*****Name             :Automation Team
+*****Description      :Team Name is : Automation Team and Created on 2021-05-12T19:25:29.826Z
+*****Logo             :zohodesk/atomationteam/teamlogo.jpg
+*****Last Modified On :2021-05-12T19:28:39.039Z
+*****Created On       :2021-05-12T19:25:29.826Z
+**************************************************
+ * 		
+ */
+
 	}
 
 	private static void adapterPatternAKAWrapper() {
