@@ -31,20 +31,58 @@ import patterns.structural.bridge2.CitiBankPaymentGateway;
 import patterns.structural.bridge2.HDFCPaymentGateWay;
 import patterns.structural.bridge2.Payment;
 import patterns.structural.bridge2.UPIPayment;
+import patterns.structural.composite.Leaf;
+import patterns.structural.composite.Component;
+import patterns.structural.composite.Composite;
 
 public class Main {
 	public static void main(String[] args) throws CloneNotSupportedException {	
 		/**Creational Design Pattern Start**/
-//		singletonDesignPattern();
-//		factoryDesignPattern();
-//		abstractFactoryPattern();
-//		builderPattern();
-//		prototypePattern();
-//		
-//		/**Structural Design Pattern Start**/
-//		adapterPatternAKAWrapper();
-		bridgePattern();
+		singletonDesignPattern();
+		factoryDesignPattern();
+		abstractFactoryPattern();
+		builderPattern();
+		prototypePattern();
 		
+		/**Structural Design Pattern Start**/
+		adapterPatternAKAWrapper();
+		bridgePattern();
+		compositePattern();
+		
+	}
+
+	private static void compositePattern() {
+		Composite cabinet=new Composite("Cabinet", 100);
+		
+		Composite motherboard=new Composite("Motherboard", 1000);
+		Component RAM=new Leaf("RAM", 3000);
+		Component HDD=new Leaf("HDD", 4000);
+		Composite graphicsCard=new Composite("Graphics Card", 2500);
+		motherboard.addComponent(HDD);
+		motherboard.addComponent(RAM);
+		motherboard.addComponent(graphicsCard);
+		
+		Composite cDDrive=new Composite("cDDrive", 2000);
+		Component blueRay=new Leaf("Blueray Reader", 500);
+		Component dvdReader=new Leaf("DVD Reader", 300);
+		cDDrive.addComponent(blueRay);
+		cDDrive.addComponent(dvdReader);
+
+		cabinet.addComponent(motherboard);
+		cabinet.addComponent(cDDrive);
+		
+		cabinet.showCost();
+		
+		/**
+		 * --------Cabinet : 100-----------
+--------Motherboard : 1000-----------
+HDD : 4000
+RAM : 3000
+--------Graphics Card : 2500-----------
+--------cDDrive : 2000-----------
+Blueray Reader : 500
+DVD Reader : 300
+		 * */
 	}
 
 	private static void bridgePattern() {
